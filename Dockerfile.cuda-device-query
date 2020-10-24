@@ -1,5 +1,7 @@
+ARG BASE_IMAGE
+
 # FROM defines the base image
-FROM l4t-skimage-cuda:latest
+FROM BASE_IMAGE
 
 # RUN executes a shell command
 # You can chain multiple commands together with && 
@@ -8,6 +10,7 @@ FROM l4t-skimage-cuda:latest
 # for deviceQuery by installing the CUDA samples via apt
 
 # set the working directory 
+# this image should be run with share volume with pre-built cuda samples
 WORKDIR /usr/local/cuda-10.2/samples/bin/aarch64/linux/release
 
 RUN ls -l
