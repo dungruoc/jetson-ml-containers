@@ -1,4 +1,8 @@
-FROM l4t-skimage-cuda:latest
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
+
+LABEL maintainer "dungruoc"
 
 RUN apt-get update -y \
   && apt-get install -y --no-install-recommends libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev git \

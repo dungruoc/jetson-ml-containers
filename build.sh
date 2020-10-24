@@ -1,5 +1,13 @@
-docker build -t l4t-skimage:latest -f Dockerfile.skimage .
+ARM_UBUNTU_IMG=arm64v8/ubuntu:18.04
+L4T_SKIMAGE_IMG=l4t-skimage:latest
+L4T_SKIMAGE_CUDA_IMG=l4t-skimage-cuda:latest
+L4T_SKIMAGE_CUDA_TORCH_IMG=l4t-skimage-cuda-torch:latest
+L4T_SKIMAGE_CUDA_GST_OPENCV_IMG=l4t-skimage-cuda-gst-opencv:latest
 
-docker build -t l4t-skimage-cuda:latest -f Dockerfile.skimage-cuda .
+docker build -t $L4T_SKIMAGE_IMG --build-arg "BASE_IMAGE=${ARM_UBUNTU_IMG}" -f Dockerfile.skimage .
 
-docker build -t l4t-skimage-cuda-torch:latest -f Dockerfile.skimage-cuda-pytorch .
+docker build -t $L4T_SKIMAGE_CUDA_IMG --build-arg "BASE_IMAGE=${L4T_SKIMAGE_IMG}" -f Dockerfile.cuda .
+
+docker build -t ${L4T_SKIMAGE_CUDA_TORCH_IMG} --build-arg "BASE_IMAGE=${L4T_SKIMAGE_CUDA_IMG}" -f Dockerfile.pytorch .
+
+docker build -t ${L4T_SKIMAGE_CUDA_GST_OPENCV_IMG} --build-arg "BASE_IMAGE=${L4T_SKIMAGE_CUDA_IMG}" -f Dockerfile.gstreamer-opencv .
