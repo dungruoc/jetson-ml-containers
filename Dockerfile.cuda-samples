@@ -1,0 +1,19 @@
+# FROM defines the base image
+FROM l4t-skimage-cuda:latest
+
+# RUN executes a shell command
+# You can chain multiple commands together with && 
+# A \ is used to split long lines to help with readability
+# This particular instruction installs the source files 
+# for deviceQuery by installing the CUDA samples via apt
+
+# set the working directory 
+WORKDIR /usr/local/cuda-10.2/samples/bin/aarch64/linux/release
+
+RUN ls -l
+
+# CMD defines the default command to be run in the container 
+# CMD is overridden by supplying a command + arguments to 
+# `docker run`, e.g. `nvcc --version` or `bash`
+
+CMD ["./deviceQuery"]
