@@ -1,0 +1,17 @@
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
+
+LABEL maintainer "dungruoc"
+
+RUN apt-get update -y \
+  && apt-get install -y --no-install-recommends libopenblas-base libopenmpi-dev libjpeg-dev zlib1g-dev git \
+  && rm -rf /var/lib/apt/lists/* && apt-get clean
+
+RUN wget -q https://nvidia.box.com/shared/static/ncgzus5o23uck9i5oth2n8n06k340l6k.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl \
+  && pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+
+RUN git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision \
+  && cd torchvision \
+  && export BUILD_VERSION=0.5.0 \
+  && python3 setup.py install

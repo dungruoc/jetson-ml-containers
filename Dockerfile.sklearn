@@ -1,0 +1,12 @@
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
+
+
+LABEL maintainer "dungruoc"
+
+
+RUN pip3 install -U pip testresources setuptools \
+  && pip3 install -U PyYaml scikit-learn 
+
+
