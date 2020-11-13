@@ -1,0 +1,12 @@
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
+
+LABEL maintainer "dungruoc"
+
+
+RUN apt-get update && apt-get install -y python3-gi gir1.2-gst-rtsp-server-1.0
+
+RUN pip3 install -U zmq redis
+
+RUN pip3 install pycomm3
