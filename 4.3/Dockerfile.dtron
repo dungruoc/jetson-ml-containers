@@ -1,0 +1,8 @@
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
+
+LABEL maintainer "dungruoc"
+
+RUN git clone https://github.com/facebookresearch/detectron2.git --branch v0.2.1 --single-branch detectron2 \
+  && python3 -m pip install -e detectron2
